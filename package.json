@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Systrent/punk-pong.git"
+    "url": "git+https://github.com/Systrent/CyberPong.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Systrent/punk-pong/issues"
+    "url": "https://github.com/Systrent/CyberPong/issues"
   },
-  "homepage": "https://github.com/Systrent/punk-pong#readme",
+  "homepage": "https://github.com/Systrent/CyberPong#readme",
   "dependencies": {
     "parcel": "^2.5.0",
     "typescript": "^4.6.4"
