@@ -4,11 +4,21 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<!-- Custom Favicon -->
+		<link rel="shortcut icon" href="./src/assets/pong.png" type="image/x-icon" />
+
+		<!-- Custom CSS -->
 		<link rel="stylesheet" href="./public/styles.css" />
-		<script type="module" src="/src/script.ts"></script>
-		<title>Pacman</title>
+
+		<!-- Main JS Script -->
+		<script type="module" src="./src/script.ts"></script>
+
+		<title>CyberPong</title>
 	</head>
 	<body>
-		<canvas id="canvas" width="1020" height="1024" style="width: 500px; height: 500px"></canvas>
+		<div class="container">
+			<img src="./src/assets/logo.png" alt="CyberPong Logo" />
+			<canvas id="canvas" width="1920" height="1080" style="width: 960px; height: 540px"></canvas>
+		</div>
 	</body>
 </html>
