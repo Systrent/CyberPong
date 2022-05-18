@@ -2,7 +2,7 @@ import { Actor } from './Actor';
 import { Point } from '../types/Point';
 import { converAngleToRad } from '../utils/angleToRad';
 import { checkLimits } from '../utils/checkLimits';
-import { CarKeys, KeyboardMap } from '../utils/KeyboardMap';
+import { PlayerKeys, KeyboardMap } from '../utils/KeyboardMap';
 import image from '../assets/ferrari.png';
 const audioUrl = new URL('../assets/carAccelerating.mp3', import.meta.url);
 
@@ -74,22 +74,18 @@ export class Car extends Actor {
 	}
 	keyboard_event_down(key: string): void {
 		let keyMapped = this.keyboardMap[key];
-		if (keyMapped === CarKeys.LEFT) {
-			this.angleSpeed -= 4;
-		} else if (keyMapped === CarKeys.RIGHT) {
-			this.angleSpeed += 4;
-		} else if (keyMapped === CarKeys.UP) {
+		if (keyMapped === PlayerKeys.UP) {
 			this.carAcceleration = 2;
-		} else if (keyMapped === CarKeys.DOWN) {
+		} else if (keyMapped === PlayerKeys.DOWN) {
 			this.carAcceleration = -2;
 		}
 	}
 
 	keyboard_event_up(key: string): void {
 		let keyMapped = this.keyboardMap[key];
-		if (keyMapped === CarKeys.UP) {
+		if (keyMapped === PlayerKeys.UP) {
 			this.carAcceleration = 0;
-		} else if (keyMapped === CarKeys.DOWN) {
+		} else if (keyMapped === PlayerKeys.DOWN) {
 			this.carAcceleration = 0;
 		}
 	}

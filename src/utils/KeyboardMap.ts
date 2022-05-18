@@ -1,24 +1,18 @@
-export enum CarKeys {
+export enum PlayerKeys {
 	UP,
 	DOWN,
-	LEFT,
-	RIGHT,
 }
 
 export interface KeyboardMap {
-	[key: string]: CarKeys;
+	[key: string]: PlayerKeys;
 }
 
-export const MAP_A = {
-	ArrowUp: CarKeys.UP,
-	ArrowDown: CarKeys.DOWN,
-	ArrowLeft: CarKeys.LEFT,
-	ArrowRight: CarKeys.RIGHT,
+export const MAP_1 = {
+	w: PlayerKeys.UP,
+	s: PlayerKeys.DOWN,
 };
 
-export const MAP_B = {
-	w: CarKeys.UP,
-	s: CarKeys.DOWN,
-	a: CarKeys.LEFT,
-	d: CarKeys.RIGHT,
+export const MAP_2 = {
+	i: PlayerKeys.UP,
+	k: PlayerKeys.DOWN,
 };

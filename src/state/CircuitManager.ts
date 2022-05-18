@@ -8,7 +8,7 @@ export class CircuitManager extends Actor {
 	currentBarrier: number;
 	currentLap: number;
 	constructor(actor: Actor) {
-		super({ x: 800, y: 100 });
+		super({ x: 50, y: 1040 });
 		this.currentBarrier = 0;
 		this.barriers = [];
 		this.currentLap = 0;
@@ -34,8 +34,12 @@ export class CircuitManager extends Actor {
 
 	draw(delta: number, ctx: CanvasRenderingContext2D): void {
 		ctx.font = '50px Consolas';
-		ctx.fillStyle = 'white';
-		ctx.fillText(`> laps: ${this.currentLap}/3`, this.position.x, this.position.y);
+		ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+		ctx.fillText(`<3 _ ${this.currentLap}/3`, this.position.x, this.position.y);
+
+		ctx.font = '50px Consolas';
+		ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+		ctx.fillText(`${this.currentLap}/3 _ <3`, this.position.x + 1590, this.position.y);
 	}
 
 	addLap() {
