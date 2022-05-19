@@ -1,5 +1,6 @@
 import { Actor } from './Actor';
 import { Point } from '../types/Point';
+import { checkLimits } from '../utils/checkLimits';
 import { converAngleToRad } from '../utils/angleToRad';
 import image from '../assets/ball.png';
 
@@ -21,33 +22,23 @@ export class Ball extends Actor {
 		this.ballImage.src = image;
 	}
 
-	// add delta to update
 	update(delta: number) {
 		//TODO: Improve moving and develop bouncing effect
-		// speed * delta
 		let newPosX = this.origin.x + this.speed.x * delta;
-		if (newPosX <= 1920 - this.ballSize / 2 && newPosX >= this.ballSize / 2) {
+		let newPosY = this.origin.y + this.speed.y * delta;
+
+		if (newPosX <= 1920 - this.ballSize / 2 && newPosX > 0 + this.ballSize / 2) {
 			this.origin.x = newPosX;
 		}
-		// this.timer += delta;
-
-		// if (this.timer >= 0.1) {
-		// 	this.xFrame = (this.xFrame + 1) % 6;
-		// 	this.timer = 0;
-		// }
+		if (newPosY <= 1080 - this.ballSize / 2 && newPosY > 0 + this.ballSize / 2) {
+			this.origin.y = newPosY;
+		}
 	}
 
 	//add delta to draw
 	draw(delta: number, ctx: CanvasRenderingContext2D) {
 		let origin = this.origin;
-
-		// let direction = 0;
-		// if (this.speed.x != 0 && this.speed.x < 0) {
-		// 	direction = 180;
-		// }
 		ctx.translate(origin.x, origin.y);
-		// Remember to paint a rectangle behind to configure your image
-		// ctx.fillRect(0, 0, this.ballSize, this.ballSize);
 		ctx.drawImage(this.ballImage, -this.ballSize / 2, -this.ballSize / 2, this.ballSize, this.ballSize);
 	}
 
@@ -63,9 +54,11 @@ export class Ball extends Actor {
 				break;
 			case 'ArrowUp':
 				console.log('up');
+				this.speed.y = -this.maxSpeed;
 				break;
 			case 'ArrowDown':
 				console.log('down');
+				this.speed.y = this.maxSpeed;
 				break;
 			default:
 				console.log('not a valid key');

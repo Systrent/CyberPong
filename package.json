@@ -4,9 +4,9 @@
   "description": "Pong Web Canvas Game - Mid project for Code Core School bootcamp.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "parcel index.html",
-    "build": "tsc"
+    "build": "tsc",
+    "ghbuild": "parcel build --dist-dir docs --public-url /CyberPong index.html"
   },
   "repository": {
     "type": "git",

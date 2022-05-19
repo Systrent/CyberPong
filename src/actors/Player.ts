@@ -2,8 +2,8 @@ import { Actor } from './Actor';
 import { Point } from '../types/Point';
 import { checkLimits } from '../utils/checkLimits';
 import { PlayerKeys, KeyboardMap } from '../utils/KeyboardMap';
-import image from '../assets/player.png';
 import { converAngleToRad } from '../utils/angleToRad';
+import image from '../assets/player.png';
 
 interface Size {
 	w: number;
@@ -31,7 +31,7 @@ export class Player extends Actor {
 		// console.log(this.angle);
 		// this.angle += this.angleSpeed;
 		// this.angleSpeed *= 0.9;
-		this.playerSpeed = this.playerSpeed * 0.9 + this.playerAcceleration;
+		this.playerSpeed = this.playerSpeed * delta * 0.9 + this.playerAcceleration;
 		let newPos: Point = {
 			x: this.position.x,
 			y: this.position.y + this.playerSpeed,
@@ -45,20 +45,13 @@ export class Player extends Actor {
 		ctx.translate(this.position.x, this.position.y);
 		ctx.rotate(converAngleToRad(270));
 		ctx.drawImage(this.playerImage, -this.playerSize.h / 2, -this.playerSize.w / 2, this.playerSize.h, this.playerSize.w);
-
-		// ctx.fillRect(
-		//   -this.playerSize.h / 2,
-		//   -this.playerSize.w / 2,
-		//   this.playerSize.h,
-		//   this.playerSize.w
-		// );
 	}
 	keyboard_event_down(key: string): void {
 		let keyMapped = this.keyboardMap[key];
 		if (keyMapped === PlayerKeys.UP) {
-			this.playerAcceleration = -1.2;
+			this.playerAcceleration = -7;
 		} else if (keyMapped === PlayerKeys.DOWN) {
-			this.playerAcceleration = 1.2;
+			this.playerAcceleration = 7;
 		}
 	}
 
