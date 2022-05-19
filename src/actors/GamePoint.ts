@@ -23,6 +23,7 @@ export class GamePoint extends Actor {
 	update(delta: number): void {
 		let ballPos = this.ball.position;
 		let pointPos = this.position;
+		//console.log(ballPos, pointPos);
 
 		//FIXME:
 		let ballDistance = Math.sqrt(Math.pow(pointPos.x - ballPos.x, 2) + Math.pow(pointPos.y - ballPos.y, 2));
@@ -31,7 +32,7 @@ export class GamePoint extends Actor {
 		if (ballDistance < this.pointSize / 2) {
 			this.touched = true;
 		}
-		console.log('BALL DISTANCE --->', ballDistance, 'TOUCHED --->', this.touched);
+		//console.log('BALL DISTANCE --->', ballDistance, 'TOUCHED --->', this.touched);
 	}
 
 	draw(delta: number, ctx: CanvasRenderingContext2D): void {

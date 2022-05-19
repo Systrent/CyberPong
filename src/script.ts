@@ -23,7 +23,7 @@ window.onload = () => {
 	let player1 = new Player({ x: 40, y: canvas.height / 2 }, MAP_1);
 	let player2 = new Player({ x: 1880, y: canvas.height / 2 }, MAP_2);
 	let fps = new FPSViewer({ x: canvas.width / 2 - 125, y: 60 });
-	let ball = new Ball({ x: 500, y: 500 });
+	let ball = new Ball({ x: canvas.width / 2, y: 100 });
 	createCircuit(ball);
 	let point = new GamePoint({ x: xPosRandom, y: yPosRandom }, ball);
 	let points: GamePoint[] = [point];
