@@ -5,10 +5,11 @@ import { Barrier } from './actors/Barrier';
 import { FPSViewer } from './actors/FPSViewer';
 import { Actor } from './actors/Actor';
 import { MAP_1, MAP_2 } from './utils/KeyboardMap';
-import { Circuit, createCircuit } from './state/CircuitManager';
 import { Player } from './actors/Player';
 import { Ball } from './actors/Ball';
 import { GamePoint } from './actors/GamePoint';
+import { Circuit, createCircuit } from './state/CircuitManager';
+import { Game, createGame } from './state/GameManager';
 
 window.onload = () => {
 	//* --- IMPORTANT CONSTANTS ---
@@ -16,21 +17,25 @@ window.onload = () => {
 	const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
 
 	// --- GLOBAL VARIABLES ---
-	let xPosRandom = Math.floor(Math.random() * 1300) + 300;
-	let yPosRandom = Math.floor(Math.random() * 800) + 175;
+	let maxPoints = 4;
 
 	// --- ACTORS ---
 	let player1 = new Player({ x: 40, y: canvas.height / 2 }, MAP_1);
 	let player2 = new Player({ x: 1880, y: canvas.height / 2 }, MAP_2);
 	let fps = new FPSViewer({ x: canvas.width / 2 - 125, y: 60 });
-	let ball = new Ball({ x: canvas.width / 2, y: 100 });
-	createCircuit(ball);
-	let point = new GamePoint({ x: xPosRandom, y: yPosRandom }, ball);
-	let points: GamePoint[] = [point];
+	let points: GamePoint[] = [];
+	let ball = new Ball({ x: canvas.width / 2, y: 100 }, player1, player2);
+	createGame(ball);
+	for (let i = 0; i < maxPoints; i++) {
+		let xPosRandom = Math.floor(Math.random() * 1300) + 300;
+		let yPosRandom = Math.floor(Math.random() * 800) + 175;
+		const point = new GamePoint({ x: xPosRandom, y: yPosRandom }, ball);
+		points.push(point);
+	}
 	//let barriers: Barrier[] = [...Circuit.barriers];
 
 	// --- MAIN ACTORS ARRAY (Objects in the game) ---
-	let actors: Actor[] = [fps, player1, player2, ball, Circuit, ...points];
+	let actors: Actor[] = [fps, player1, player2, ball, Game, ...points];
 
 	// --- RENDERING ---
 	let lastFrame = 0;

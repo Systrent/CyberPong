@@ -12,11 +12,13 @@ interface Size {
 
 export class Player extends Actor {
 	//TODO: Add attributes
-	playerSize: Size;
 	playerSpeed: number;
 	playerAcceleration: number;
+	playerLifes: number;
+	playerSize: Size;
 	playerImage: HTMLImageElement;
 	keyboardMap: KeyboardMap;
+
 	constructor(initialPos: Point, keyboardMap: KeyboardMap, size: Size = { w: 22, h: 140 }) {
 		super(initialPos);
 		this.playerSize = size;
@@ -25,12 +27,10 @@ export class Player extends Actor {
 		this.playerImage = new Image();
 		this.playerImage.src = image;
 		this.keyboardMap = keyboardMap;
+		this.playerLifes = 5;
 	}
 
 	update(delta: number): void {
-		// console.log(this.angle);
-		// this.angle += this.angleSpeed;
-		// this.angleSpeed *= 0.9;
 		this.playerSpeed = this.playerSpeed * delta * 0.9 + this.playerAcceleration;
 		let newPos: Point = {
 			x: this.position.x,
@@ -41,11 +41,13 @@ export class Player extends Actor {
 			this.position = newPos;
 		}
 	}
+
 	draw(delta: number, ctx: CanvasRenderingContext2D): void {
 		ctx.translate(this.position.x, this.position.y);
 		ctx.rotate(converAngleToRad(270));
 		ctx.drawImage(this.playerImage, -this.playerSize.h / 2, -this.playerSize.w / 2, this.playerSize.h, this.playerSize.w);
 	}
+
 	keyboard_event_down(key: string): void {
 		let keyMapped = this.keyboardMap[key];
 		if (keyMapped === PlayerKeys.UP) {
