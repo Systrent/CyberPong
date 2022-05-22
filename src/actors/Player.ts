@@ -14,7 +14,7 @@ export class Player extends Actor {
 	//TODO: Add attributes
 	playerSpeed: number;
 	playerAcceleration: number;
-	playerLifes: number;
+	playerPoints: number;
 	playerSize: Size;
 	playerImage: HTMLImageElement;
 	keyboardMap: KeyboardMap;
@@ -27,7 +27,7 @@ export class Player extends Actor {
 		this.playerImage = new Image();
 		this.playerImage.src = image;
 		this.keyboardMap = keyboardMap;
-		this.playerLifes = 5;
+		this.playerPoints = 5;
 	}
 
 	update(delta: number): void {
@@ -51,9 +51,9 @@ export class Player extends Actor {
 	keyboard_event_down(key: string): void {
 		let keyMapped = this.keyboardMap[key];
 		if (keyMapped === PlayerKeys.UP) {
-			this.playerAcceleration = -7;
+			this.playerAcceleration = -13;
 		} else if (keyMapped === PlayerKeys.DOWN) {
-			this.playerAcceleration = 7;
+			this.playerAcceleration = 13;
 		}
 	}
 

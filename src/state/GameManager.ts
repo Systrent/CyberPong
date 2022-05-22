@@ -35,13 +35,13 @@ export class GameManager extends Actor {
 	}
 
 	draw(delta: number, ctx: CanvasRenderingContext2D): void {
-		ctx.font = '50px Consolas';
-		ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
-		ctx.fillText(`<3 _ ${this.currentLap}/5`, this.position.x, this.position.y);
+		ctx.font = '47px Consolas';
+		ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+		ctx.fillText(`✦ _ ${this.currentLap}/10`, this.position.x, this.position.y);
 
-		ctx.font = '50px Consolas';
-		ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
-		ctx.fillText(`${this.currentLap}/5 _ <3`, this.position.x + 1590, this.position.y);
+		ctx.font = '47px Consolas';
+		ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+		ctx.fillText(`${this.currentLap}/10 _ ✦`, this.position.x + 1570, this.position.y);
 	}
 
 	addLap() {
