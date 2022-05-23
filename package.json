@@ -2,7 +2,6 @@
   "name": "mid-project",
   "version": "1.0.0",
   "description": "Pong Web Canvas Game - Mid project for Code Core School bootcamp.",
-  "main": "index.js",
   "scripts": {
     "dev": "parcel index.html",
     "build": "tsc",
