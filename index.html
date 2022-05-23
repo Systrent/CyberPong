@@ -5,10 +5,13 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<!-- Custom Favicon -->
-		<link rel="shortcut icon" href="./src/assets/pong.png" type="image/x-icon" />
+		<link rel="shortcut icon" href="./src/assets/favicon.png" type="image/x-icon" />
 
 		<!-- Custom CSS -->
 		<link rel="stylesheet" href="./public/styles.css" />
+
+		<!-- Animate.css CSS Library -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
 		<!-- Main TS Script -->
 		<script type="module" src="./src/script.ts"></script>
@@ -17,8 +20,8 @@
 	</head>
 	<body>
 		<div class="container">
-			<img src="./src/assets/logo.png" alt="CyberPong Logo" />
-			<canvas id="canvas" width="1920" height="1080" style="width: 960px; height: 540px"></canvas>
+			<img class="animate__animated animate__rubberBand" src="./src/assets/logo.png" alt="CyberPong Logo" />
+			<canvas class="animate__animated animate__zoomInDown" id="canvas" width="1920" height="1080" style="width: 960px; height: 540px"></canvas>
 		</div>
 	</body>
 </html>

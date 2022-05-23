@@ -1,7 +1,5 @@
 import { Actor } from './Actor';
 import { Point } from '../types/Point';
-import { checkLimits } from '../utils/checkLimits';
-import { converAngleToRad } from '../utils/angleToRad';
 import { Player } from './Player';
 import image from '../assets/ball.png';
 
@@ -9,27 +7,32 @@ import image from '../assets/ball.png';
 const canvas = document.getElementById('canvas') as HTMLCanvasElement;
 
 export class Ball extends Actor {
-	//TODO: Add attributes
 	ballSize: number;
 	maxSpeed: number;
-	collisionCunter: number;
+	collisionCounter: number;
 	keyStartPressed: boolean;
+	reset: boolean;
+	winPlayer1: boolean;
+	winPlayer2: boolean;
 	speed: Point;
 	ballImage: HTMLImageElement;
 	player1: Player;
 	player2: Player;
 
-	constructor(initialPos: Point, player1: Player, player2: Player, maxSpeed = 400) {
+	constructor(initialPos: Point, player1: Player, player2: Player) {
 		super(initialPos);
 		this.ballSize = 30;
-		this.maxSpeed = maxSpeed;
+		this.maxSpeed = 400;
 		this.speed = { x: 0, y: 0 };
 		this.ballImage = new Image();
 		this.ballImage.src = image;
 		this.player1 = player1;
 		this.player2 = player2;
 		this.keyStartPressed = false;
-		this.collisionCunter = 0;
+		this.collisionCounter = 0;
+		this.reset = false;
+		this.winPlayer1 = false;
+		this.winPlayer2 = false;
 	}
 
 	update(delta: number) {
@@ -38,44 +41,56 @@ export class Ball extends Actor {
 		let player2Pos = this.player2.position;
 		let newPosX = this.position.x + this.speed.x * delta;
 		let newPosY = this.position.y + this.speed.y * delta;
-		// let yBallPosRandom = Math.floor(Math.random() * 680) + 200;
+		let yBallPosRandom = Math.floor(Math.random() * 680) + 200;
 
-		// //* RESETING EACH POINT SCORED
-		// if (newPosX + ballRadius > player2Pos.x + 15) {
-		// 	this.position.x = canvas.width / 2;
-		// 	this.position.y = yBallPosRandom;
-		// }
-		// if (newPosX - ballRadius < player1Pos.x - 15) {
-		// 	this.position.x = canvas.width / 2;
-		// 	this.position.y = yBallPosRandom;
-		// }
+		//* RESETING EACH POINT SCORED
+		if (newPosX + ballRadius > player2Pos.x + 25) {
+			this.maxSpeed = 400;
+			this.collisionCounter = 0;
+			this.reset = true;
+			this.winPlayer1 = true;
+			this.speed = { x: 0, y: 0 };
+			this.keyStartPressed = false;
+			newPosX = canvas.width / 2;
+			newPosY = yBallPosRandom;
+		} else if (newPosX - ballRadius < player1Pos.x - 25) {
+			this.maxSpeed = 400;
+			this.collisionCounter = 0;
+			this.reset = true;
+			this.winPlayer2 = true;
+			this.speed = { x: 0, y: 0 };
+			this.keyStartPressed = false;
+			newPosX = canvas.width / 2;
+			newPosY = yBallPosRandom;
+		}
 
 		//* BOUNCING IN THE PLAYERS
 		if (
-			newPosX + ballRadius > player2Pos.x -  11 &&
-			newPosY + ballRadius > player2Pos.y - 85 &&
-			newPosY + ballRadius < player2Pos.y + 85 &&
-			this.speed.x > 0
+			newPosX + ballRadius > player2Pos.x - 11 &&
+			newPosY + ballRadius > player2Pos.y - 80 &&
+			newPosY + ballRadius < player2Pos.y + 80 &&
+			this.speed.x > 0 &&
+			this.reset === false
 		) {
-			this.collisionCunter++;
-			this.maxSpeed += this.collisionCunter + 35;
+			this.collisionCounter++;
+			this.maxSpeed += this.collisionCounter + 35;
 			this.speed.x = -this.maxSpeed;
 		} else if (
 			newPosX - ballRadius < player1Pos.x + 11 &&
-			newPosY + ballRadius > player1Pos.y - 85 &&
-			newPosY + ballRadius < player1Pos.y + 85 &&
-			this.speed.x < 0
+			newPosY + ballRadius > player1Pos.y - 80 &&
+			newPosY + ballRadius < player1Pos.y + 80 &&
+			this.speed.x < 0 &&
+			this.reset === false
 		) {
-			this.collisionCunter++;
-			this.maxSpeed += this.collisionCunter + 35;
+			this.collisionCounter++;
+			this.maxSpeed += this.collisionCounter + 35;
 			this.speed.x = this.maxSpeed;
 		}
 
 		//* BOUNCING IN THE "TOP AND BOTTOM WALLS"
 		if (newPosY + ballRadius > 1080) {
 			this.speed.y = -this.maxSpeed;
-		}
-		if (newPosY - ballRadius < 0) {
+		} else if (newPosY - ballRadius < 0) {
 			this.speed.y = this.maxSpeed;
 		}
 
@@ -91,9 +106,9 @@ export class Ball extends Actor {
 	}
 
 	keyboard_event_down(key: string) {
-		console.log(key);
 		switch (key) {
 			case ' ':
+				this.reset = false;
 				let sideRandom = Math.floor(Math.random() * 2) + 1;
 				if (sideRandom === 1 && this.keyStartPressed === false) {
 					this.speed = { x: -this.maxSpeed, y: this.maxSpeed };
@@ -102,9 +117,6 @@ export class Ball extends Actor {
 					this.speed = { x: this.maxSpeed, y: this.maxSpeed };
 					this.keyStartPressed = true;
 				}
-				break;
-			default:
-				console.log('not a valid key');
 				break;
 		}
 	}

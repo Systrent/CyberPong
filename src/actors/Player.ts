@@ -11,7 +11,6 @@ interface Size {
 }
 
 export class Player extends Actor {
-	//TODO: Add attributes
 	playerSpeed: number;
 	playerAcceleration: number;
 	playerPoints: number;
@@ -27,7 +26,7 @@ export class Player extends Actor {
 		this.playerImage = new Image();
 		this.playerImage.src = image;
 		this.keyboardMap = keyboardMap;
-		this.playerPoints = 5;
+		this.playerPoints = 0;
 	}
 
 	update(delta: number): void {

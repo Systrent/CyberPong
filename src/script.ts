@@ -5,6 +5,7 @@ import { Player } from './actors/Player';
 import { Ball } from './actors/Ball';
 import { GamePoint } from './actors/GamePoint';
 import { Game, createGame } from './state/GameManager';
+import { BackgroundMusic } from './actors/BackgroundMusic';
 
 window.onload = () => {
 	//* --- IMPORTANT CONSTANTS ---
@@ -12,26 +13,19 @@ window.onload = () => {
 	const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
 
 	// --- GLOBAL VARIABLES ---
-	let maxPoints = 3;
 	let yBallPosRandom = Math.floor(Math.random() * 680) + 200;
 
 	// --- ACTORS ---
+	let music = new BackgroundMusic();
 	let player1 = new Player({ x: 40, y: canvas.height / 2 }, MAP_1);
 	let player2 = new Player({ x: 1880, y: canvas.height / 2 }, MAP_2);
-	let fps = new FPSViewer({ x: canvas.width / 2 - 125, y: 60 });
-	let points: GamePoint[] = [];
+	let fps = new FPSViewer({ x: canvas.width / 2 - 106, y: 60 });
 	let ball = new Ball({ x: canvas.width / 2, y: yBallPosRandom }, player1, player2);
-	createGame(ball);
-	for (let i = 0; i < maxPoints; i++) {
-		let xPosRandom = Math.floor(Math.random() * 1300) + 300;
-		let yPosRandom = Math.floor(Math.random() * 800) + 175;
-		const point = new GamePoint({ x: xPosRandom, y: yPosRandom }, ball);
-		points.push(point);
-	}
-	//let barriers: Barrier[] = [...Circuit.barriers];
+	createGame(ball, player1, player2);
+	let points: GamePoint[] = [...Game.points];
 
 	// --- MAIN ACTORS ARRAY (Objects in the game) ---
-	let actors: Actor[] = [fps, player1, player2, ball, Game, ...points];
+	let actors: Actor[] = [music, fps, player1, player2, ball, Game, ...points];
 
 	// --- RENDERING ---
 	let lastFrame = 0;

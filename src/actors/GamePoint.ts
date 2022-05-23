@@ -1,12 +1,11 @@
-import { Circuit, CircuitManager } from '../state/CircuitManager';
 import { Point } from '../types/Point';
-import { converAngleToRad } from '../utils/angleToRad';
 import { Actor } from './Actor';
 import image from '../assets/point.png';
 
 export class GamePoint extends Actor {
 	pointSize: number;
 	touched: boolean;
+	notTouched: boolean;
 	pointImage: HTMLImageElement;
 	ball: Actor;
 
@@ -15,6 +14,7 @@ export class GamePoint extends Actor {
 		this.pointSize = pointSize;
 		this.ball = ball;
 		this.touched = false;
+		this.notTouched = true;
 		this.pointImage = new Image();
 		this.pointImage.src = image;
 	}
