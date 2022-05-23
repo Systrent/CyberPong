@@ -1,12 +1,80 @@
+/* --- BASIC RESET --- */
+* {
+	margin: 0;
+	padding: 0;
+}
+
+/* --- BODY DEFAULT SETTINGS --- */
+
 body {
 	width: 100vw;
 	height: 100vh;
-	margin: 0;
+}
+
+/* --- CUSTOM CLASSES --- */
+
+.container {
+	width: 100vw;
+	height: 100vh;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	flex-direction: column;
+	background-color: #242424;
+	background-image: linear-gradient(rgba(191, 123, 255, 1) 1px, transparent 1px), linear-gradient(to right, rgba(191, 123, 255, 1) 1px, #242424 1px);
+	background-size: 40px 40px;
+	animation: fadeInBackground 11s, moveBackground 2.4s 11s infinite alternate;
+}
+
+.container img {
+	width: 800px;
+	margin-bottom: 50px;
+	-webkit-filter: drop-shadow(10px 5px 5px #222);
+	filter: drop-shadow(10px 5px 5px #222);
+	/* Animate.css */
+	animation: rubberBand 2s 11s, fadeInTitle 11s;
 }
 
 #canvas {
-	border: 3px solid blue;
+	--glow-color: rgb(217, 176, 255);
+	--glow-spread-color: rgba(191, 123, 255, 0.781);
+	border: 0.25em solid var(--glow-color);
+	background-image: url(/src/assets/background.png);
+	background-repeat: none;
+	background-size: cover;
+	outline: none;
+	box-shadow: 0 0 2em 0.1em var(--glow-color), 0 0 6em 1em var(--glow-spread-color), inset 0 0 0.75em 0.25em var(--glow-color);
+	/* Animate.css */
+	animation: zoomInDown 11s;
+}
+
+/* --- ANIMATION KEYFRAMES ---  */
+
+@keyframes fadeInBackground {
+	0% {
+		filter: brightness(0);
+		background-size: 40px 1px;
+	}
+	100% {
+		filter: brightness(1);
+		background-size: 40px 40px;
+	}
+}
+
+@keyframes moveBackground {
+	0% {
+		background-size: 40px 40px;
+	}
+	100% {
+		background-size: 40px 37px;
+	}
+}
+
+@keyframes fadeInTitle {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
 }
